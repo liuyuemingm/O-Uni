@@ -36,11 +36,11 @@ export default function Posts() {
               <AccordionSummary>
                 <div style={{ margin: "10px 12px 6px", display: "inline" }}>
                   {(() => {
-                    if (item.type == "General Post") {
+                    if (item.post_type == "GP") {
                       return (
                         <FavoriteIcon color="error" />
                       )
-                    } else if (item.type == "Item Trading") {
+                    } else if (item.post_type == "IT") {
                       return (
                         <SellIcon color="info" />
                       )
@@ -52,11 +52,11 @@ export default function Posts() {
                   })()}
                 </div>
                 {(() => {
-                  if (item.type == "General Post") {
+                  if (item.post_type == "GP") {
                     return (
                       <p style={{ margin: "11px", position: "absolute", left: " 50px" }}>  {item.reaction}</p>
                     )
-                  } else if (item.type == "Item Trading") {
+                  } else if (item.post_type == "IT") {
                     return (
                       <p style={{ margin: "11px", position: "absolute", left: " 50px" }}> $ {item.reaction}</p>
                     )
@@ -75,7 +75,7 @@ export default function Posts() {
                 {item.message}
                 <div style={{ position: "relative", left: "90%" }}>
                   {(() => {
-                    if (item.type == "General Post") {
+                    if (item.post_type == "GP") {
                       return (<LikeButton />)
                     }
                   })()}
@@ -102,7 +102,7 @@ export default function Posts() {
                 <Divider variant="fullWidth" />
                 <div style={{ position: "relative", margin: "12px" }}>
                   {(() => {
-                    if (item.type == "Course Rating") {
+                    if (item.post_type == "CR") {
                       return (<AxiosRating />)
                     }
                   })()}
