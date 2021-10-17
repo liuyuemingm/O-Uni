@@ -5,6 +5,9 @@ import { makeStyles } from '@material-ui/core/styles';
 import Modal from '@material-ui/core/Modal';
 import Backdrop from '@material-ui/core/Backdrop';
 import Fade from '@material-ui/core/Fade';
+import { AppBar } from '@material-ui/core';
+import { Toolbar } from '@material-ui/core';
+import { Typography } from '@material-ui/core';
 
 const useStyles = makeStyles(theme => ({
   modal: {
@@ -86,5 +89,6 @@ export default function AnimatedModal() {
           </Modal>
         </Toolbar>
       </AppBar>
-      );
+    </div>
+  );
 }

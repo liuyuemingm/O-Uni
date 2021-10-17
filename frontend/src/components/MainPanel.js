@@ -5,7 +5,7 @@ import NewPost from "./NewPost";
 import PostsAccordion from "./PostsAccordion"
 
 export default function MainPanel() {
-  const [active, setActive] = useState("New post")
+  const [active, setActive] = useState("Threads")
 
   return (
     <div>
