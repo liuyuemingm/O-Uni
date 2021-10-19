@@ -1,4 +1,3 @@
-open User
 (*********************** Data and utility funcs ************************)
 
 (* type person = { name: string; age: int; hobbies: string list } *)
@@ -42,12 +41,12 @@ let myMongoDB =
 
 (*********************** Inserting ************************)
 
-let init_user info = 
-  {email=info.email; p_info=init_personal_info info; cont=init_content}
+(* let init_user info = 
+  {email=info.email; p_info=init_personal_info info; cont=init_content} *)
 
 let insert_user () = 
   let info = {email="ajy33@cornell.edu"; password="abc123"; name="Aaron"; school="Cornell"; year=2024; major="CS"} in
-  let user = init_user info in 
+  let user = User.init_user info in 
   try Mongo.insert myMongoDB (user_to_bson user)
   with 
     Mongo.Mongo_failed ex -> (
@@ -55,27 +54,21 @@ let insert_user () =
       Mongo.destory myMongoDB
     )
 
-(** val insert_users : unit -> unit *)
-(* let insert_users () =
-  let people = [
-        {name="John Doe"; age=21; hobbies=["Soccer"; "Coding"]};
-        {name="Jane Smith"; age=25; hobbies=["Drawing"]};
-        {name="Person1"; age=10; hobbies=["philosophy"; "reading"]};
-        {name="Person2"; age=20; hobbies=["surfing"; "volleyball"]};
-        {name="Person3"; age=30; hobbies=["coding"]}
-      ] 
-  in 
-  try 
-    List.map person_to_bson people
-      |> Mongo.insert myMongoDB
-
-  with 
-    Mongo.Mongo_failed ex -> (
-      Pervasives.print_endline ex;
-      Mongo.destory myMongoDB
-  ) *)
-
 (*********************** Querying ************************)
+
+let email_to_bson_query email = 
+  Bson.empty
+    |> Bson.add_element "email" (Bson.create_string email)
+
+let validate_password email pwd =
+  let query = email_to_bson_query email in 
+  let res = Mongo.find_q_one query in
+  let p_info = Bson.get_element "personal_info" (MongoReply.get_document_list res) in
+  let password = p_info.password in
+  if pwd = password then
+    res
+  else 
+    raise Exception 
 
 (* SELECT * FROM myMongoDB WHERE age >= 21 *)
 (* { "age": {"$gte": 21 }} *)
