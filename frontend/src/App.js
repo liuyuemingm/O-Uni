@@ -4,10 +4,12 @@ import LogB from './components/Sample';
 import MainPanel from './components/MainPanel';
 import { Tab } from '@mui/material';
 import LabTabs from './components/Tab';
+import Register from './components/Register';
 function App() {
   return (
     <div className="App">
       {/* <Navbar /> */}
+      <Register />
       <LogB />
       <MainPanel />
       {/* <LabTabs /> */}
