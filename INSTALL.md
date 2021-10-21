@@ -1,70 +1,26 @@
-# O-Uni
+#!/bin/sh
 
-A bulletin board for college students to interact with each other. 
+opam switch create Mongo ocaml-base-compiler.4.05.0
+opam switch Mongo
+brew install libevent
+opam pin opium 0.16.0
+opam install camlp4
+opam install mongo
+brew tap mongodb/brew
+brew install mongodb-community@5.0
+# TODO make sure if you need to execute a command after new installation
+# eval $(opam env)   # TODO check if you need to run this line
+brew services start mongodb-community @5.0
 
-This is a fall 2021 Cornell CS-3110 final project.
+# below logic will make sure mongod is running
+if [ -z "`ps -ef | grep mongod`" ]; then
+       echo "Something wrong, MongoDB is not up and running"
+       exit 1
+else
+       echo "MongoDB is up and running"
+       # TODO subsitue your filename here
+       ocamlfind ocamlc -o testout.out -linkpkg -package mongo -thread <$lename>.ml
+fi
 
-Team members: Aaron Ye, Daniel Zhou, Kelly Chen, Yueming Liu
-
-## System Requirements
-
-- Ocaml 4.05.0
-- dune 1.6.x
-- Node.js 10.x.x
-- npm 6.x.x
-- opam 2.0.5
-- mongo 0.67.2
-- camlp4 4.05
-- opium 0.16.0
-
-## Installation for Windows (WSL)
-
-As of right now, the frontend, the backend, and the server have yet to be integrated. Instructions on running independent demos of them are as follows.
-
-### Frontend
-
-Install Node.js and npm.
-
-```
-$ sudo apt update
-$ sudo apt install nodejs
-$ sudo apt install npm
-```
-
-To run the frontend, cd into ./frontend and run `npm start`
-
-### Backend and server
-
-Create opam switch and install necessary packages. Run `eval $(opam evn)` when prompted. 
-
-```
-$ opam switch create <name> ocaml-base-compiler.4.05.0
-$ sudo apt-get update
-$ sudo apt-get install libevent-dev 
-$ opam pin opium 0.16.0
-$ opam install camlp4
-$ opam install mongo
-```
-
-To demo the backend:
-TODO
-
-## Installation for Mac
-
-### Frontend
-
-TODO
-
-### Backend and server
-
-Create opam switch and install necessary packages. Run `eval $(opam evn)` when prompted. 
-
-```
-$ opam switch create <name> ocaml-base-compiler.4.05.0
-$ brew install libevent
-$ opam pin opium 0.16.0
-$ opam install camlp4
-$ opam install mongo
-```
-To demo the backend: 
-TODO
+# Terminate program
+brew services stop mongodb-community @5.0

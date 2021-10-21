@@ -11,7 +11,7 @@ exception InvalidSchoolName of string
 exception InvalidMajorName of string
 
 let init_login_info (email : string) (psswd : string) : login_information =
-  {email=email; password=psswd}
+  {email=email; password=psswd} 
 
 let valid_email (email : string) : bool = 
   let pattern = "[a-z0-9]+@[a-z]+\.edu" in
@@ -23,21 +23,22 @@ let valid_string school =
   let exp = Str.regexp pattern in
   Str.string_match exp school 0
 
-let login login_info = 
+let login login_info myMongoDB = 
   let email = login_info.email in
   let pswd = login_info.password in 
-  None
+  try Some (Database.validate_password myMongoDB email pswd) 
+  with _ -> None
   
-let sign_up (sign_up_info : sign_up_information) : User.t = 
-  if not (valid_email (User.get_email(sign_up_info))) then
-    raise (InvalidEmail (User.get_email(sign_up_info)))
-  else if not (valid_string (User.get_school(sign_up_info))) then
-    raise (InvalidSchoolName (User.get_school(sign_up_info)))
-  else if not (valid_string (User.get_major(sign_up_info))) then
-    raise (InvalidMajorName (User.get_major(sign_up_info)))
-  else User.init_user sign_up_info
+let sign_up (sign_up_info : sign_up_information) (myMongoDB : Mongo.t): User.t option = 
+  let user = User.init_user sign_up_info in
+  if not (valid_email (User.get_email(user))) then
+    raise (InvalidEmail (User.get_email(user)))
+  else if not (valid_string (User.get_school(user))) then
+    raise (InvalidSchoolName (User.get_school(user)))
+  else if not (valid_string (User.get_major(user))) then
+    raise (InvalidMajorName (User.get_major(user)))
+  else try Some (Database.insert_user myMongoDB user) with _ -> None
     
-  
   
 
 
