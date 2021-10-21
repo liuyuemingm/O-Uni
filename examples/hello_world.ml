@@ -1,5 +1,7 @@
 open Opium
 
+let port = 3000
+
 module Person = struct
   type t =
     { name : string
@@ -45,6 +47,7 @@ let print_param_handler req =
 
 let _ =
   App.empty
+  |> App.port port
   |> App.post "/hello/stream" streaming_handler
   |> App.get "/hello/:name" print_param_handler
   |> App.get "/person/:name/:age" print_person_handler
