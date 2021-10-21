@@ -31,7 +31,7 @@ $ sudo apt install nodejs
 $ sudo apt install npm
 ```
 
-To run the frontend, cd into /frontend and run `npm start`
+To run the frontend, cd into ./frontend and run `npm start`
 
 ### Backend and server
 
