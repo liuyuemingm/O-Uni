@@ -54,7 +54,11 @@ TODO
 ### Frontend
 
 Install Node.js and npm.
+
+
 Download the macOS installer for Node.js from this link: https://nodejs.org/en/download/
+
+
 Then run the following command in terminal:
 
 ```
