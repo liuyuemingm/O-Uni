@@ -23,6 +23,8 @@ As of right now, the frontend, the backend, and the server have yet to be integr
 
 ### Frontend
 
+Download Node.js here: https://nodejs.org/en/download/
+
 Install Node.js and npm.
 
 ```
