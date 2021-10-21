@@ -10,6 +10,12 @@ exception InvalidSchoolName of string
 
 exception InvalidMajorName of string
 
+let get_email (info : login_information) : string = 
+  info.email
+
+let get_password (info : login_information) : string = 
+  info.password
+
 let init_login_info (email : string) (psswd : string) : login_information =
   {email=email; password=psswd} 
 

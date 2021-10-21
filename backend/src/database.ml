@@ -3,7 +3,7 @@ exception UnableToRegister
 
 (*********************** Creating a db instance ************************)
 
-let startDB : Mongo.t = 
+let startDB = 
   let myMongoDB = 
   let open Mongo in
   let url = "127.0.0.1" in (* string *)
@@ -40,7 +40,7 @@ let validate_password (myMongoDB : Mongo.t) (email : string) (pwd : string) : Us
     let user = User.bson_to_user elem in
     let password = User.get_password user in
     if pwd = password then
-      let _ = print_endline pwd in
+      (* let _ = print_endline pwd in *)
       user
     else 
       raise (UserNotFound email)

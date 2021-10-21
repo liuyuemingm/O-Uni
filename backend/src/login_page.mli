@@ -15,3 +15,7 @@ val sign_up : sign_up_information -> Mongo.t -> User.t option
 (** sign up*)
 
 val init_login_info : string -> string -> login_information
+
+val get_email : login_information -> string
+
+val get_password : login_information -> string
