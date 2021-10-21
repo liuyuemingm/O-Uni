@@ -3,7 +3,7 @@ exception UnableToRegister
 
 (*********************** Creating a db instance ************************)
 
-let startDB () = 
+let startDB : Mongo.t = 
   let myMongoDB = 
   let open Mongo in
   let url = "127.0.0.1" in (* string *)

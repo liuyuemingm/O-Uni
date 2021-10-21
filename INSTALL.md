@@ -11,6 +11,7 @@ brew install mongodb-community@5.0
 # TODO make sure if you need to execute a command after new installation
 # eval $(opam env)   # TODO check if you need to run this line
 brew services start mongodb-community @5.0
+mongod
 
 # below logic will make sure mongod is running
 if [ -z "`ps -ef | grep mongod`" ]; then
@@ -19,7 +20,7 @@ if [ -z "`ps -ef | grep mongod`" ]; then
 else
        echo "MongoDB is up and running"
        # TODO subsitue your filename here
-       ocamlfind ocamlc -o testout.out -linkpkg -package mongo -thread <$lename>.ml
+       # ocamlfind ocamlc -o testout.out -linkpkg -package mongo -thread <$lename>.ml
 fi
 
 # Terminate program
