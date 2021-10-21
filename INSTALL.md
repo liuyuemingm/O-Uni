@@ -46,4 +46,25 @@ $ opam install camlp4
 $ opam install mongo
 ```
 
+To demo the backend:
+TODO
+
 ## Installation for Mac
+
+### Frontend
+
+TODO
+
+### Backend and server
+
+Create opam switch and install necessary packages. Run `eval $(opam evn)` when prompted. 
+
+```
+$ opam switch create <name> ocaml-base-compiler.4.05.0
+$ brew install libevent
+$ opam pin opium 0.16.0
+$ opam install camlp4
+$ opam install mongo
+```
+To demo the backend: 
+TODO
