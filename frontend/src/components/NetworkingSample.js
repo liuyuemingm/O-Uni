@@ -1,3 +1,5 @@
+// tutorial from https://levelup.gitconnected.com/how-to-make-http-requests-with-fetch-api-be018730811f
+
 const APIURL = "http://localhost:8000";
 export const getContacts = async () => {
   const res = await fetch(`${APIURL}/contacts`);
