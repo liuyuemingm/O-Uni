@@ -25,12 +25,28 @@ class Register extends Component {
     this.state = {
       formValid: false,
       errorCount: null,
+      fullName: '',
+      password: '',
       errors: {
         fullName: '',
         email: '',
         password: '',
       }
     };
+  }
+
+  handleForm = e => {
+    e.preventDefault();
+    const data = {fullName: this.state.fullName, password: this.state.password}
+    console.log(data)
+    fetch("http://localhost:3000", {
+      method: "POST",
+      body: JSON.stringify(data),
+      headers: {"Content-Type": "application/jason"}
+    })
+    .then(res => res.json())
+    .then(res => console.log(res))
+    .catch( e => console.log(e));
   }
 
   handleChange = (event) => {
@@ -70,7 +86,7 @@ class Register extends Component {
       <div className='wrapper'>
         <div className='form-wrapper'>
           <h2>Login</h2>
-          <form onSubmit={this.handleSubmit} noValidate>
+          <form onSubmit={this.handleForm} noValidate>
             <div className='fullName'>
               <label htmlFor="fullName">User Name</label>
               <input type='text' name='fullName' onChange={this.handleChange} noValidate />
@@ -87,7 +103,7 @@ class Register extends Component {
             <div className='submit'>
               <button>Login</button>
             </div>
-            {this.state.errorCount !== null ? <p className="form-status">Form is {formValid ? 'valid ✅' : 'invalid ❌'}</p> : 'Form not submitted'}
+            {this.state.errorCount !== null ? <p className="form-status" >Form is {formValid ? 'valid ✅' : 'invalid ❌'}</p> : 'Form not submitted'}
           </form>
         </div>
       </div>
