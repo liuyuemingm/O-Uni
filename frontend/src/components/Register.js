@@ -14,7 +14,7 @@ const validateForm = (errors) => {
 const countErrors = (errors) => {
   let count = 0;
   Object.values(errors).forEach(
-    (val) => val.length > 0 && (count = count+1)
+    (val) => val.length > 0 && (count = count + 1)
   );
   return count;
 }
@@ -37,16 +37,16 @@ class Register extends Component {
 
   handleForm = e => {
     e.preventDefault();
-    const data = {fullName: this.state.fullName, password: this.state.password}
+    const data = { fullName: this.state.fullName, password: this.state.password }
     console.log(data)
-    fetch("http://localhost:3000", {
+    fetch("http://localhost:5000", {
       method: "POST",
       body: JSON.stringify(data),
-      headers: {"Content-Type": "application/jason"}
+      headers: { "Content-Type": "application/jason" }
     })
-    .then(res => res.json())
-    .then(res => console.log(res))
-    .catch( e => console.log(e));
+      .then(res => res.json())
+      .then(res => console.log(res))
+      .catch(e => console.log(e));
   }
 
   handleChange = (event) => {
@@ -55,14 +55,14 @@ class Register extends Component {
     let errors = this.state.errors;
 
     switch (name) {
-      case 'fullName': 
-        errors.fullName = 
+      case 'fullName':
+        errors.fullName =
           (value === "user1") === false
             ? 'User not found'
             : '';
         break;
-      case 'password': 
-        errors.password = 
+      case 'password':
+        errors.password =
           (value === "123456") === false
             ? 'Password incorrect'
             : '';
@@ -71,17 +71,17 @@ class Register extends Component {
         break;
     }
 
-    this.setState({errors, [name]: value});
+    this.setState({ errors, [name]: value });
   }
 
   handleSubmit = (event) => {
     event.preventDefault();
-    this.setState({formValid: validateForm(this.state.errors)});
-    this.setState({errorCount: countErrors(this.state.errors)});
+    this.setState({ formValid: validateForm(this.state.errors) });
+    this.setState({ errorCount: countErrors(this.state.errors) });
   }
 
   render() {
-    const {errors, formValid} = this.state;
+    const { errors, formValid } = this.state;
     return (
       <div className='wrapper'>
         <div className='form-wrapper'>
@@ -90,14 +90,14 @@ class Register extends Component {
             <div className='fullName'>
               <label htmlFor="fullName">User Name</label>
               <input type='text' name='fullName' onChange={this.handleChange} noValidate />
-              {errors.fullName.length > 0 && 
+              {errors.fullName.length > 0 &&
                 <span className='error'>{errors.fullName}</span>}
             </div>
 
             <div className='password'>
               <label htmlFor="password">Password</label>
               <input type='password' name='password' onChange={this.handleChange} noValidate />
-              {errors.password.length > 0 && 
+              {errors.password.length > 0 &&
                 <span className='error'>{errors.password}</span>}
             </div>
             <div className='submit'>

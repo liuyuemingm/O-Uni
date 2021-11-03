@@ -18,12 +18,24 @@
 
  val user_to_bson : t -> Bson.t
 
- val get_email : personal_info -> string
+ val get_email : t -> string
 
- val get_school : personal_info -> string
+ val get_school : t -> string
 
- val get_major : personal_info -> string
+ val get_major : t -> string
+
+ val get_password : t -> string
+
+ val get_name : t -> string
+
+ val get_year : t -> int 
 
  val init_user : personal_info -> t 
 
+ val info_to_t : string -> string -> string -> string -> int -> string -> personal_info
 
+ val bson_to_user : Bson.t -> t
+
+ val p_info_to_json : personal_info -> Yojson.Basic.t
+
+ val user_to_json : t -> Yojson.Basic.t
