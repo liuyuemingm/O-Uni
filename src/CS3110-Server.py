@@ -2,7 +2,7 @@ from flask import Flask, request, session, g, redirect, url_for, abort, render_t
 from datetime import date, datetime
 import os
 
-from flask_cors import cross_origin, CORS
+from flask_cors import CORS
 
 import pandas as pd
 import json
@@ -86,7 +86,7 @@ def process_data():
             jsonOutfhandle = open(input_filename, "r")
             s = jsonOutfhandle.read()
             data = json.loads(json.dumps(s))
-            # print(data)
+            print(data)
             #data = json.loads(json.dump(jsonOutfhandle))
             jsonOutfhandle.close()
             response = app.response_class(response = json.dumps(data ),
@@ -116,7 +116,6 @@ def process_data():
 
 @app.route('/')
 @app.route("/CS3110-server/signup", methods = ['GET', 'POST'])
-# @cross_origin()
 def process_report():
     print ("request: signup")
     try:
@@ -154,6 +153,7 @@ def process_report():
             jsonOutfhandle = open(input_filename, "r")
             s = jsonOutfhandle.read()
             data = json.loads(json.dumps(s))
+            print(data)
             #data = json.loads(json.dump(jsonOutfhandle))
             jsonOutfhandle.close()
             response = app.response_class(response = json.dumps(data ),
