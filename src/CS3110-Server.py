@@ -2,6 +2,8 @@ from flask import Flask, request, session, g, redirect, url_for, abort, render_t
 from datetime import date, datetime
 import os
 
+from flask_cors import cross_origin, CORS
+
 import pandas as pd
 import json
 from json import dumps
@@ -38,6 +40,7 @@ controller_host = '0.0.0.0'
 controller_version = 1.0
 
 app = Flask(__name__)
+CORS(app)
 @app.route('/')
 @app.route('/testService', methods = ['GET','POST'])
 def index():
@@ -113,6 +116,7 @@ def process_data():
 
 @app.route('/')
 @app.route("/CS3110-server/signup", methods = ['GET', 'POST'])
+# @cross_origin()
 def process_report():
     print ("request: signup")
     try:
@@ -159,7 +163,7 @@ def process_report():
 
             cmd = "rm " + input_filename
             subprocess.Popen(cmd, shell=True, stdout=subprocess.PIPE, stderr=subprocess.STDOUT)
-            response.headers.add('Access-Control-Allow-Origin', '*')
+            # response.headers.add('Access-Control-Allow-Origin', '*')
             # response.header['Access-Control-Allow-Origin'] = '*'
             return response
 

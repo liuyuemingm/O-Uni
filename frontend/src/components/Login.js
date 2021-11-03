@@ -49,7 +49,7 @@ class Login extends Component {
     e.preventDefault();
     const data = { fullName: this.state.fullName, password: this.state.password }
     console.log(data)
-    fetch("http://localhost:5000", {
+    fetch("http://localhost:5000/CS3110-server/signup", {
       method: "POST",
       body: JSON.stringify(data),
       headers: { "Content-Type": "application/jason" }
