@@ -11,20 +11,15 @@ import Typography from '@material-ui/core/Typography';
 import TextField from "@material-ui/core/TextField";
 import { Grid } from "@material-ui/core";
 
-const classes = {};
-
 const LogB = () => {
   const [openLogin, setOpenLogin] = useState(false);
-  const [openSignup, setOpenSignup] = useState(false);
 
   return (
-
     <div>
       <Top
         onClickLogin={() => setOpenLogin(true)}
-        onClickSignup={() => setOpenSignup(true)}
       />
-      <LoginModal open={openSignup} handleClose={() => setOpenSignup(false)} />
+      <LoginModal open={openLogin} handleClose={() => setOpenLogin(false)} />
     </div>
   );
 };
@@ -33,7 +28,7 @@ const Top = (props) => {
   return (
     <Button
       variant="outlined"
-      onClick={props.onClickSignup}
+      onClick={props.onClickLogin}
       style={{ color: "#B52E2E" }}
     >
       Login

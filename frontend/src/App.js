@@ -5,13 +5,12 @@ import MainPanel from './components/MainPanel';
 import { Tab } from '@mui/material';
 import LabTabs from './components/Tab';
 import Register from './components/Register';
-import Login from './components/Login';
+import Login from './components/Axios_Login';
 import PostRequest from './components/LoginAxios';
 function App() {
   return (
     <div className="App">
       {/* <Navbar /> */}
-      <PostRequest />
       <Login />
       <LogB />
       <MainPanel />
