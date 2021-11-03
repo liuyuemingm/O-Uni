@@ -16,16 +16,19 @@ const classes = {};
 const LogB = () => {
   const [openLogin, setOpenLogin] = useState(false);
   const [openSignup, setOpenSignup] = useState(false);
+  const [openUser, setOpenUser] = useState(false);
+
 
   return (
-
     <div>
       <Top
         onClickLogin={() => setOpenLogin(true)}
         onClickSignup={() => setOpenSignup(true)}
+        onClickUser={() => setOpenUser(true)}
       />
       <SignupModal open={openLogin} handleClose={() => setOpenLogin(false)} />
       <LoginModal open={openSignup} handleClose={() => setOpenSignup(false)} />
+      <UserModal open={openUser} handleClose={() => setOpenUser(false)} />
     </div>
   );
 };
@@ -54,6 +57,14 @@ const Top = (props) => {
         >
           Login
         </Button>
+        <Button
+          variant="outlined"
+          className={classes.loginButton}
+          onClick={props.onClickUser}
+          style={{color:"#B52E2E"}}
+        >
+          User Profile
+        </Button>
       </div>
     </React.Fragment>
     </Toolbar>
@@ -81,6 +92,10 @@ const SignupModal = (props) => {
             <TextField id="standard-basic" label="email" fullWidth />
             <TextField id="standard-basic" label="password" fullWidth />
             <TextField id="standard-basic" label="confirm password" fullWidth />
+            <TextField id="standard-basic" label="school" fullWidth />
+            <TextField id="standard-basic" label="school year" fullWidth />
+            <TextField id="standard-basic" label="major" fullWidth />
+
           </div>
         </DialogContent>
         <DialogActions>
@@ -114,6 +129,42 @@ const LoginModal = (props) => {
         <DialogActions>
           <Button onClick={props.handleClose} className={classes.signUpButton}>
             Login
+          </Button>
+        </DialogActions>
+      </Dialog>
+    </div>
+  );
+
+
+
+  
+};
+
+const UserModal = (props) => {
+  return (
+    <div>
+      <Dialog
+        open={props.open}
+        onClose={props.handleClose}
+        aria-labelledby="alert-dialog-title"
+        aria-describedby="alert-dialog-description"
+        fullWidth = {10}
+      >
+        <DialogTitle id="alert-dialog-title" className={classes.title}>
+          User Profile
+        </DialogTitle>
+        <DialogContent className={classes.content}>
+          <div className={classes.text}>
+          <Typography htmlFor="name">Name: Aron </Typography>
+          <Typography htmlFor="email">Email: abc123@cornell.edu </Typography>
+          <Typography htmlFor="school">School: Cornell </Typography>
+          <Typography htmlFor="year">Year: 2024</Typography>
+          <Typography htmlFor="major">Major: CS</Typography>
+          </div>
+        </DialogContent>
+        <DialogActions>
+          <Button onClick={props.handleClose} className={classes.signUpButton}>
+            Close
           </Button>
         </DialogActions>
       </Dialog>
