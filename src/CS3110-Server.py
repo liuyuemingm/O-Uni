@@ -1,8 +1,7 @@
+from flask_cors import CORS
 from flask import Flask, request, session, g, redirect, url_for, abort, render_template, flash, jsonify
 from datetime import date, datetime
 import os
-
-from flask_cors import CORS
 
 import pandas as pd
 import json
@@ -135,7 +134,8 @@ def process_report():
             input_filename = HOME_DIR + '/' + "clientInput_" + datetime_string
             print ("receiving browser data in file", input_filename)
             pfile.write("receiving browser data in file" + input_filename)
-
+            print('date = \n\n')
+            print(records)
             jsonInputfhandle = open (input_filename, "w")
             jsonInputfhandle.write(json.dumps(records))
             jsonInputfhandle.close()

@@ -4,13 +4,18 @@ let myMongoDB = Database.startDB
 
 let file = Sys.argv.(1)
 
+let () = print_endline "in sign up"
+
 let input_json = Yojson.Basic.from_file file
+
+let () = print_endline "received json from file"
+
 let email = input_json |> Yojson.Basic.Util.member "email" |> Yojson.Basic.Util.to_string
 let password = input_json |> Yojson.Basic.Util.member "password" |> Yojson.Basic.Util.to_string
 let name = input_json |> Yojson.Basic.Util.member "name" |> Yojson.Basic.Util.to_string
 let school = input_json |> Yojson.Basic.Util.member "school" |> Yojson.Basic.Util.to_string
 let major = input_json |> Yojson.Basic.Util.member "major" |> Yojson.Basic.Util.to_string
-let year = input_json |> Yojson.Basic.Util.member "year" |> Yojson.Basic.Util.to_int
+let year = input_json |> Yojson.Basic.Util.member "year" |> Yojson.Basic.Util.to_string |> int_of_string
 
 let () = 
   let user = User.init_user (User.info_to_t email password name school year major) in

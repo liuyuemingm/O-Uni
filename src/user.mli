@@ -36,6 +36,8 @@
 
  val bson_to_user : Bson.t -> t
 
+ val content_to_json : content list -> Yojson.Basic.t
+
  val p_info_to_json : personal_info -> Yojson.Basic.t
 
  val user_to_json : t -> Yojson.Basic.t

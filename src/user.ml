@@ -1,7 +1,7 @@
 open Yojson 
 
 type personal_info = {email: string; password: string; name: string; school: string; year: int; major: string}
-type content = string
+type content = Content.t
 type t = {email: string; p_info: personal_info; cont: content list}
 
 type email_name = string
@@ -21,9 +21,12 @@ let p_info_to_json (p : personal_info) : Yojson.Basic.t =
   ("major", `String p.major) ] 
   in res
 
-let user_to_json user = 
+let content_to_json (c : content list) : Yojson.Basic.t =
+  `List (List.map Content.content_to_json c)
+
+let user_to_json (user : t) : Yojson.Basic.t = 
   (* add in content *)
-  let res = `Assoc [ ("email", `String user.email); ("p_info", p_info_to_json user.p_info) ]
+  let res = `Assoc [ ("email", `String user.email); ("p_info", p_info_to_json user.p_info); ("content", content_to_json user.cont) ]
   in res
 
 let init_content = []
@@ -49,7 +52,8 @@ let get_name (user : t) = user.p_info.name
 let get_year (user : t) = user.p_info.year
 
 let extract_content (elem : Bson.element) : content = 
-  ""
+  let bson = Bson.get_doc_element elem in
+  Content.bson_to_content bson
 
 let personal_info_to_bson (p_info : personal_info) = 
   Bson.empty 
@@ -61,7 +65,8 @@ let personal_info_to_bson (p_info : personal_info) =
   |> Bson.add_element "password" (Bson.create_string p_info.password)
   
 let user_to_bson {email; p_info; cont} = 
-  let content_elems = List.map (Bson.create_string) cont in
+  let func x = Bson.create_doc_element (Content.content_to_bson x) in
+  let content_elems = List.map func cont in
   Bson.empty 
     |> Bson.add_element "personal_info" (Bson.create_doc_element (personal_info_to_bson p_info))
     |> Bson.add_element "email" (Bson.create_string p_info.email)

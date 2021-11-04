@@ -2,9 +2,10 @@ import './App.css';
 import { createTheme, ThemeProvider, styled } from '@mui/material/styles';
 import { red } from '@mui/material/colors';
 import Signup from './components/Axios_Signup';
-import MainPanel from './components/MainPanel';
 import Login from './components/Axios_Login';
 import Axios_AppBar from './components/Axios_AppBar';
+import NewPost from './components/Axios_NewPost';
+import PostsThread from './components/Axios_Posts';
 
 
 
@@ -28,13 +29,11 @@ function App() {
         <Axios_AppBar />
 
         <div style={{ display: "flex", margin: "20px 10px" }}>
-          <Login />
           <Signup />
-
+          <Login />
+          <NewPost />
         </div>
-
-
-        <MainPanel />
+        <PostsThread />
       </ThemeProvider>
     </div>
   );
