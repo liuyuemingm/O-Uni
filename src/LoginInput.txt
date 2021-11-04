@@ -1,0 +1,12 @@
+{
+  "email": "yl3436@cornell.edu",
+  "p_info": {
+    "email": "yl3436@cornell.edu",
+    "password": "1",
+    "name": "Yueming Liu",
+    "school": "1",
+    "year": 1,
+    "major": "1"
+  },
+  "content": []
+}
