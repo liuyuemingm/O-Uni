@@ -7,6 +7,7 @@ import DialogActions from '@mui/material/DialogActions';
 import DialogContent from '@mui/material/DialogContent';
 import DialogContentText from '@mui/material/DialogContentText';
 import DialogTitle from '@mui/material/DialogTitle';
+import { color } from '@mui/system';
 
 
 export default class Login extends React.Component {
@@ -49,12 +50,12 @@ export default class Login extends React.Component {
 
   render() {
     return (
-      <div>
-        <Button variant="outlined" onClick={this.handleClickOpen}>
+      <div style={{ margin: "0 10px 0" }}>
+        <Button onClick={this.handleClickOpen} variant="outlined">
           Login
         </Button>
         <Dialog open={this.state.open} onClose={this.handleClose} >
-          <DialogTitle>Subscribe</DialogTitle>
+          <DialogTitle>Welcome back!</DialogTitle>
           <DialogContent>
             <DialogContentText>
               Please login with your school email address.
