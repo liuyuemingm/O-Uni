@@ -5,7 +5,7 @@ import Signup from './components/Axios_Signup';
 import Login from './components/Axios_Login';
 import Axios_AppBar from './components/Axios_AppBar';
 import NewPost from './components/Axios_NewPost';
-import PostsThread from './components/Axios_Posts';
+import Posts from './components/Axios_Posts';
 
 
 
@@ -33,7 +33,7 @@ function App() {
           <Login />
           <NewPost />
         </div>
-        <PostsThread />
+        <Posts />
       </ThemeProvider>
     </div>
   );
