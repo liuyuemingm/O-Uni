@@ -91,14 +91,6 @@ export default class Signup extends React.Component {
             />
             <TextField
               margin="dense"
-              label="School"
-              fullWidth
-              variant="standard"
-              name='school'
-              onChange={this.handleChange}
-            />
-            <TextField
-              margin="dense"
               label="Major"
               fullWidth
               variant="standard"
