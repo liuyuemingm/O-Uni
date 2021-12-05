@@ -55,7 +55,7 @@ export default class Profile extends React.Component {
         </Button>
         <Dialog open={this.state.open} onClose={this.handleClose} >
           <DialogTitle>My User Profile</DialogTitle>
-          <DialogContent>
+          <DialogContent style={{ width: '300px' }}>
             <DialogContentText>
               Name: {this.props.name}
             </DialogContentText>
