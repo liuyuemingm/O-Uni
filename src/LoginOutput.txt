@@ -1,0 +1,11 @@
+{
+  "email": "abc123@cornell.edu",
+  "p_info": {
+    "email": "abc123@cornell.edu",
+    "password": "abc123",
+    "name": "ABC",
+    "school": "Harvard",
+    "year": 2025,
+    "major": "Psychology"
+  }
+}

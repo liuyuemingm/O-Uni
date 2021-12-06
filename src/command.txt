@@ -1,0 +1,6 @@
+
+# use command line to send as from browser to test the server
+
+curl -X POST -H "Content-Type: application/json" -d @studentrecord1.json http://localhost:5000/CS3110-server/login
+
+curl -X POST -H "Content-Type: application/json" -d @studentrecord2.json http://localhost:5000/CS3110-server/signup

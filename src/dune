@@ -1,0 +1,3 @@
+(executable
+ (name my_test)
+ (libraries unix mongo ANSITerminal))
