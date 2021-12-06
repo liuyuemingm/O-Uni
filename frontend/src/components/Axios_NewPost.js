@@ -8,6 +8,14 @@ import DialogContent from '@mui/material/DialogContent';
 import DialogContentText from '@mui/material/DialogContentText';
 import DialogTitle from '@mui/material/DialogTitle';
 import { color } from '@mui/system';
+import Radio from '@mui/material/Radio';
+import RadioGroup from '@mui/material/RadioGroup';
+import FormControlLabel from '@mui/material/FormControlLabel';
+import FormControl from '@mui/material/FormControl';
+import FormLabel from '@mui/material/FormLabel';
+
+
+
 
 
 export default class NewPost extends React.Component {
@@ -58,9 +66,20 @@ export default class NewPost extends React.Component {
         <Dialog open={this.state.open} onClose={this.handleClose} fullWidth >
           <DialogTitle>Share anything :)</DialogTitle>
           <DialogContent>
-            <DialogContentText>
 
-            </DialogContentText>
+            <FormControl component="fieldset">
+              <FormLabel component="legend">Post Type</FormLabel>
+              <RadioGroup
+                aria-label="gender"
+                defaultValue="female"
+                name="radio-buttons-group"
+              >
+                <FormControlLabel value="General Post" control={<Radio />} label="General Post" />
+                <FormControlLabel value="Item Trading" control={<Radio />} label="Item Trading" />
+                <FormControlLabel value="Course Rating" control={<Radio />} label="Course Rating" />
+              </RadioGroup>
+            </FormControl>
+
             <TextField
               margin="dense"
               id="title"
@@ -85,7 +104,12 @@ export default class NewPost extends React.Component {
           </DialogContent>
           <DialogActions>
             <Button onClick={this.handleClose}>Cancel</Button>
-            <Button onClick={this.handleSubmit}>Post</Button>
+            {(() => {
+              const signedIn = false
+              if (signedIn) return (<Button onClick={this.handleSubmit}>Post</Button>)
+              else return (<Button disabled>go sign in dude</Button>)
+            })()}
+
           </DialogActions>
         </Dialog>
       </div>

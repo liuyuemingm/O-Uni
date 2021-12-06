@@ -2,97 +2,118 @@ import * as React from 'react';
 import Accordion from '@mui/material/Accordion';
 import AccordionDetails from '@mui/material/AccordionDetails';
 import AccordionSummary from '@mui/material/AccordionSummary';
-import Typography from '@mui/material/Typography';
 import LikeButton from './LikeButton';
+import { PostData } from './PostData';
+import SellIcon from '@mui/icons-material/Sell';
+import StarIcon from '@mui/icons-material/Star';
+import FavoriteIcon from '@mui/icons-material/Favorite';
+import List from '@mui/material/List';
+import ListItem from '@mui/material/ListItem';
+import Divider from '@mui/material/Divider';
+import ListItemText from '@mui/material/ListItemText';
+import TextField from '@mui/material/TextField';
+import axios from 'axios';
+import Button from '@mui/material/Button';
+import Respond from './Axios_Response';
+import AxiosRating from './Axios_Rating';
+
 
 export default function Posts() {
   const [expanded, setExpanded] = React.useState(false);
+
 
   const handleChange = (panel) => (event, isExpanded) => {
     setExpanded(isExpanded ? panel : false);
   };
 
+
   return (
     <div style={{ width: "75%", margin: "20px", textAlign: "left", background: "darkred", padding: "20px" }}>
+      <div>
+        {PostData.map((item, index) => {
+          return (
+            <Accordion expanded={expanded === index} onChange={handleChange(index)}>
+              <AccordionSummary>
+                <div style={{ margin: "10px 12px 6px", display: "inline" }}>
+                  {(() => {
+                    if (item.type == "General Post") {
+                      return (
+                        <FavoriteIcon color="error" />
+                      )
+                    } else if (item.type == "Item Trading") {
+                      return (
+                        <SellIcon color="info" />
+                      )
+                    } else {
+                      return (
+                        <StarIcon color="warning" />
+                      )
+                    }
+                  })()}
+                </div>
+                {(() => {
+                  if (item.type == "General Post") {
+                    return (
+                      <p style={{ margin: "11px", position: "absolute", left: " 50px" }}>  {item.reaction}</p>
+                    )
+                  } else if (item.type == "Item Trading") {
+                    return (
+                      <p style={{ margin: "11px", position: "absolute", left: " 50px" }}> $ {item.reaction}</p>
+                    )
+                  } else {
+                    return (
+                      <p style={{ margin: "11px", position: "absolute", left: " 50px" }}>  {item.reaction}/ 5</p>
+                    )
+                  }
+                })()}
 
-      <Accordion expanded={expanded === 'panel1'} onChange={handleChange('panel1')}>
-        <AccordionSummary
-          aria-controls="panel1bh-content"
-          id="panel1bh-header"
-        >
-          <LikeButton />
-          <p style={{ margin: "10px", position: "absolute", left: " 50px" }}> 25</p>
-          <p style={{ margin: "10px", position: "absolute", left: " 100px" }}> <b> Post </b></p>
-          <p style={{ margin: "10px", position: "absolute", left: " 200px" }}> I love the chime concert today. </p>
-          <p style={{ margin: "10px", position: "absolute", left: " 650px" }}> al343 </p>
-        </AccordionSummary>
-        <AccordionDetails>
-          <Typography>
-            Nulla facilisi. Phasellus sollicitudin nulla et quam mattis feugiat.
-            Aliquam eget maximus est, id dignissim quam.
-          </Typography>
-        </AccordionDetails>
-      </Accordion>
+                <p style={{ margin: "10px", position: "absolute", left: " 200px" }}> <b> {item.title} </b></p>
+                <p style={{ margin: "10px", position: "absolute", left: " 600px" }}> {item.author} </p>
+                <p style={{ margin: "10px", position: "absolute", left: " 750px" }}> {item.date} </p>
+              </AccordionSummary>
+              <AccordionDetails>
+                {item.message}
+                <div style={{ position: "relative", left: "90%" }}>
+                  {(() => {
+                    if (item.type == "General Post") {
+                      return (<LikeButton />)
+                    }
+                  })()}
+                </div>
+                <p />
+                <Divider variant="fullWidth" />
 
-      <Accordion expanded={expanded === 'panel2'} onChange={handleChange('panel2')}>
-        <AccordionSummary
-          aria-controls="panel2bh-content"
-          id="panel2bh-header"
-        >
-          <LikeButton />
-          <p style={{ margin: "10px", position: "absolute", left: " 50px" }}> 13</p>
-          <p style={{ margin: "10px", position: "absolute", left: " 100px" }}> <b> Post </b></p>
-          <p style={{ margin: "10px", position: "absolute", left: " 200px" }}> The Apocalypse Debate was AMAZING </p>
-          <p style={{ margin: "10px", position: "absolute", left: " 650px" }}> kc56 </p>
-        </AccordionSummary>
-        <AccordionDetails>
-          <Typography>
-            Nulla facilisi. Phasellus sollicitudin nulla et quam mattis feugiat.
-            Aliquam eget maximus est, id dignissim quam.
-          </Typography>
-        </AccordionDetails>
-      </Accordion>
+                <List sx={{ width: '100%', maxWidth: 360, bgcolor: 'background.paper' }}>
+                  <Divider />
+                  {item.responses.map((res, key) => {
+                    return (
+                      <div>
+                        <ListItem alignItems="flex-start">
+                          <ListItemText
+                            primary={res.name}
+                            secondary={res.response}
+                          />
+                        </ListItem>
+                        <Divider variant="fullWidth" component="li" />
+                      </div>
+                    )
+                  })}
+                </List>
+                <Divider variant="fullWidth" />
+                <div style={{ position: "relative", margin: "12px" }}>
+                  {(() => {
+                    if (item.type == "Course Rating") {
+                      return (<AxiosRating />)
+                    }
+                  })()}
+                </div>
+                <Respond title={item.title} />
+              </AccordionDetails>
+            </Accordion>
+          )
+        })}
+      </div>
+    </div >
 
-      <Accordion expanded={expanded === 'panel3'} onChange={handleChange('panel3')}>
-        <AccordionSummary
-          aria-controls="panel3bh-content"
-          id="panel3bh-header"
-        >
-          <LikeButton />
-          <p style={{ margin: "10px", position: "absolute", left: " 50px" }}> 34</p>
-          <p style={{ margin: "10px", position: "absolute", left: " 100px" }}> <b> Post </b></p>
-          <p style={{ margin: "10px", position: "absolute", left: " 200px" }}> Did they run out of ice cream in Okies?</p>
-          <p style={{ margin: "10px", position: "absolute", left: " 650px" }}> cj226 </p>
-        </AccordionSummary>
-        <AccordionDetails>
-          <Typography>
-            Nulla facilisi. Phasellus sollicitudin nulla et quam mattis feugiat.
-            Aliquam eget maximus est, id dignissim quam.
-          </Typography>
-        </AccordionDetails>
-      </Accordion>
-
-      <Accordion expanded={expanded === 'panel4'} onChange={handleChange('panel4')}>
-        <AccordionSummary
-          aria-controls="panel4bh-content"
-          id="panel4bh-header"
-        >
-          <LikeButton />
-          <p style={{ margin: "10px", position: "absolute", left: " 50px" }}> 46</p>
-          <p style={{ margin: "10px", position: "absolute", left: " 100px" }}> <b> Post </b></p>
-          <p style={{ margin: "10px", position: "absolute", left: " 200px" }}> Can't believe it's November right now... </p>
-          <p style={{ margin: "10px", position: "absolute", left: " 650px" }}> abc20 </p>
-        </AccordionSummary>
-        <AccordionDetails>
-          <Typography>
-            Nulla facilisi. Phasellus sollicitudin nulla et quam mattis feugiat.
-            Aliquam eget maximus est, id dignissim quam.
-          </Typography>
-        </AccordionDetails>
-      </Accordion>
-
-
-
-    </div>
   );
 }
