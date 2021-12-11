@@ -7,7 +7,8 @@ import Axios_AppBar from './components/Axios_AppBar';
 import NewPost from './components/Axios_NewPost';
 import Posts from './components/Axios_Posts';
 import PostTypes from './components/Axios_PostTypes';
-
+import Profile from './components/Axios_UserProfile';
+import img from './image1.png';
 
 
 
@@ -27,7 +28,8 @@ function App() {
   return (
     <div className="App">
       <ThemeProvider theme={theme}>
-        <Axios_AppBar />
+        {/* <Axios_AppBar /> */}
+        <img src={img} id='image' />
 
         <div style={{ display: "flex", margin: "20px 10px" }}>
           <Signup />

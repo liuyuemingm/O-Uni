@@ -1,5 +1,5 @@
 import React from 'react';
-import axios from 'axios';
+import axios, { Axios } from 'axios';
 import Button from '@mui/material/Button';
 import TextField from '@mui/material/TextField';
 import Dialog from '@mui/material/Dialog';
@@ -8,9 +8,23 @@ import DialogContent from '@mui/material/DialogContent';
 import DialogContentText from '@mui/material/DialogContentText';
 import DialogTitle from '@mui/material/DialogTitle';
 import { color } from '@mui/system';
+import Profile from './Axios_UserProfile';
 
 
 export default class Login extends React.Component {
+
+
+  constructor(props) {
+    super(props);
+    this.state = {
+      email: 'svbcdhisdc',
+      name: 'me',
+      school: 'cornell',
+      major: 'ehhh',
+      password: '',
+      year: '2023'
+    }
+  }
 
   state = {
     open: false,
@@ -86,6 +100,12 @@ export default class Login extends React.Component {
             <Button onClick={this.handleSubmit}>Login</Button>
           </DialogActions>
         </Dialog>
+        <Profile email={this.state.email}
+          name={this.state.name}
+          school={this.state.school}
+          major={this.state.major}
+          year={this.state.year}
+        />
       </div>
     )
   }

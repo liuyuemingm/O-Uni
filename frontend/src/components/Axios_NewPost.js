@@ -42,9 +42,10 @@ export default class NewPost extends React.Component {
     const newpost = {
       postType: this.state.postType,
       title: this.state.title,
-      message: this.state.message
+      message: this.state.message,
+      date: this.state.currentDateTime,
     };
-
+    console.log(newpost);
     axios.post(`http://localhost:5000/CS3110-server/login`, this.state)
       .then(res => {
         console.log(this.state);
@@ -105,7 +106,7 @@ export default class NewPost extends React.Component {
           <DialogActions>
             <Button onClick={this.handleClose}>Cancel</Button>
             {(() => {
-              const signedIn = false
+              const signedIn = true
               if (signedIn) return (<Button onClick={this.handleSubmit}>Post</Button>)
               else return (<Button disabled>go sign in dude</Button>)
             })()}
