@@ -29,7 +29,7 @@ export default class Signup extends React.Component {
 
   handleSubmit = event => {
     event.preventDefault();
-
+    window.signedIn = true;
     const signup = {
       email: this.state.email,
       password: this.state.password,

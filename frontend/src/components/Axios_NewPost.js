@@ -108,7 +108,7 @@ export default class NewPost extends React.Component {
           <DialogActions>
             <Button onClick={this.handleClose}>Cancel</Button>
             {(() => {
-              const signedIn = true
+              const signedIn = window.signedIn
               if (signedIn) return (<Button onClick={this.handleSubmit}>Post</Button>)
               else return (<Button disabled>go sign in dude</Button>)
             })()}
