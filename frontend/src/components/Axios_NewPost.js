@@ -38,12 +38,14 @@ export default class NewPost extends React.Component {
 
   handleSubmit = event => {
     event.preventDefault();
+    var tempDate = new Date();
+    this.state.date = tempDate.getFullYear() + (tempDate.getMonth() + 1) + tempDate.getDate()
 
     const newpost = {
       postType: this.state.postType,
       title: this.state.title,
       message: this.state.message,
-      date: this.state.currentDateTime,
+      date: this.state.date,
     };
     console.log(newpost);
     axios.post(`http://localhost:5000/CS3110-server/login`, this.state)
