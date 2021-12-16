@@ -9,6 +9,7 @@ import Posts from './components/Axios_Posts';
 import PostTypes from './components/Axios_PostTypes';
 import Profile from './components/Axios_UserProfile';
 import img from './image1.png';
+import TestBtn from './components/Axios_TestBtn';
 
 
 

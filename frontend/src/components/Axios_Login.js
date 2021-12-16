@@ -22,7 +22,8 @@ export default class Login extends React.Component {
       school: 'cornell',
       major: 'ehhh',
       password: '',
-      year: '2023'
+      year: '2023',
+      open: false
     }
   }
 

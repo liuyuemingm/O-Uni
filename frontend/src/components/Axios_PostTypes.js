@@ -1,90 +1,79 @@
 import React from 'react';
 import axios from 'axios';
 import Button from '@mui/material/Button';
-import TextField from '@mui/material/TextField';
-import Dialog from '@mui/material/Dialog';
-import DialogActions from '@mui/material/DialogActions';
-import DialogContent from '@mui/material/DialogContent';
-import DialogContentText from '@mui/material/DialogContentText';
-import DialogTitle from '@mui/material/DialogTitle';
-import { color } from '@mui/system';
 import SellIcon from '@mui/icons-material/Sell';
 import StarIcon from '@mui/icons-material/Star';
 import FavoriteIcon from '@mui/icons-material/Favorite';
+import EventEmitter from './EventEmitter';
 
-export default class PostTypes extends React.Component {
+export default function PostTypes() {
 
-  state = {
-    postType: "ALL"
+  const handleAll = event => {
+    const BtnInfo = { post_type: "ALL" }
+    event.preventDefault();
+    console.log("Outside of the function ALL: " + BtnInfo);
+    axios.post(`http://localhost:5000/CS3110-server/login`, BtnInfo)
+      .then(res => {
+        console.log("Inside of the function ALL" + BtnInfo);
+        console.log(res);
+        EventEmitter.emit('ChangePostType', BtnInfo)
+      })
   }
 
-  handleAll = event => {
-    this.setState({ postType: "ALL" })
-    console.log(this.state);
-    // event.preventDefault();
-
-    // axios.post(`http://localhost:5000/CS3110-server/login`, this.state)
-    //   .then(res => {
-    //     console.log(this.state);
-    //   })
-
-  }
-
-  handleGP = event => {
-    this.setState({ postType: "GP" })
-    console.log(this.state);
-    // event.preventDefault();
-
-    // axios.post(`http://localhost:5000/CS3110-server/login`, this.state)
-    //   .then(res => {
-    //     console.log(this.state);
-    //   })
+  const handleGP = event => {
+    const BtnInfo = { post_type: "GP" }
+    event.preventDefault();
+    console.log("Outside of the function ALL: " + BtnInfo);
+    axios.post(`http://localhost:5000/CS3110-server/login`, BtnInfo)
+      .then(res => {
+        console.log("Inside of the function ALL" + BtnInfo);
+        console.log(res);
+        EventEmitter.emit('ChangePostType', BtnInfo)
+      })
 
   }
-  handleIT = event => {
-    this.setState({ postType: "IT" })
-    console.log(this.state);
-    // event.preventDefault();
-
-    // axios.post(`http://localhost:5000/CS3110-server/login`, this.state)
-    //   .then(res => {
-    //     console.log(this.state);
-    //   })
-
+  const handleIT = event => {
+    const BtnInfo = { post_type: "IT" }
+    event.preventDefault();
+    console.log("Outside of the function ALL: " + BtnInfo);
+    axios.post(`http://localhost:5000/CS3110-server/login`, BtnInfo)
+      .then(res => {
+        console.log("Inside of the function ALL" + BtnInfo);
+        console.log(res);
+        EventEmitter.emit('ChangePostType', BtnInfo)
+      })
   }
-  handleCR = event => {
-    this.setState({ postType: "CR" })
-    console.log(this.state);
-    // event.preventDefault();
-
-    // axios.post(`http://localhost:5000/CS3110-server/login`, this.state)
-    //   .then(res => {
-    //     console.log(this.state);
-    //   })
-
+  const handleCR = event => {
+    const BtnInfo = { post_type: "CR" }
+    event.preventDefault();
+    console.log("Outside of the function ALL: " + BtnInfo);
+    axios.post(`http://localhost:5000/CS3110-server/login`, BtnInfo)
+      .then(res => {
+        console.log("Inside of the function ALL" + BtnInfo);
+        console.log(res);
+        EventEmitter.emit('ChangePostType', BtnInfo)
+      })
   }
 
-  render() {
-    return (
-      <div style={{ display: "inline-block" }}>
-        <div style={{ margin: "0 10px 0" }}>
-          <Button onClick={this.handleAll} variant="outlined" >
-            <FavoriteIcon color="error" />
-            <SellIcon color="info" />
-            <StarIcon color="warning" />
-          </Button>
+  return (
+    <div style={{ display: "inline-block" }}>
+      <div style={{ margin: "0 10px 0" }}>
+        <Button onClick={handleAll} variant="outlined" >
+          <FavoriteIcon color="error" />
+          <SellIcon color="info" />
+          <StarIcon color="warning" />
+        </Button>
 
-          <Button onClick={this.handleGP} variant="outlined" >
-            <FavoriteIcon color="error" />
-          </Button>
-          <Button onClick={this.handleIT} variant="outlined" >
-            <SellIcon color="info" />
-          </Button>
-          <Button onClick={this.handleCR} variant="outlined" >
-            <StarIcon color="warning" />
-          </Button>
-        </div>
+        <Button onClick={handleGP} variant="outlined" >
+          <FavoriteIcon color="error" />
+        </Button>
+        <Button onClick={handleIT} variant="outlined" >
+          <SellIcon color="info" />
+        </Button>
+        <Button onClick={handleCR} variant="outlined" >
+          <StarIcon color="warning" />
+        </Button>
       </div>
-    )
-  }
+    </div>
+  )
 }

@@ -3,7 +3,10 @@ import Accordion from '@mui/material/Accordion';
 import AccordionDetails from '@mui/material/AccordionDetails';
 import AccordionSummary from '@mui/material/AccordionSummary';
 import LikeButton from './LikeButton';
-import { PostData } from './PostData';
+import { PostData_ALL } from './PostData_ALL';
+import { PostData_CR } from './PostData_CR';
+import { PostData_GP } from './PostData_GP';
+import { PostData_IT } from './PostData_IT';
 import SellIcon from '@mui/icons-material/Sell';
 import StarIcon from '@mui/icons-material/Star';
 import FavoriteIcon from '@mui/icons-material/Favorite';
@@ -16,9 +19,40 @@ import axios from 'axios';
 import Button from '@mui/material/Button';
 import Respond from './Axios_Response';
 import AxiosRating from './Axios_Rating';
-
+import EventEmitter from './EventEmitter';
 
 export default function Posts() {
+
+
+  React.useEffect(() => {
+    const onChangeType = (eventData) => {
+      console.log("post type change");
+      if (eventData.post_type == "GP") {
+        setPosts(() => (
+          PostData_GP
+        ))
+      } else if (eventData.post_type == "IT") {
+        setPosts(() => (
+          PostData_IT
+        ))
+      } else if (eventData.post_type == "CR") {
+        setPosts(() => (
+          PostData_CR
+        ))
+      } else if (eventData.post_type == "ALL") {
+        setPosts(() => (
+          PostData_ALL
+        ))
+      }
+    }
+    const listener = EventEmitter.addListener('ChangePostType', onChangeType)
+    return () => {
+      listener.remove();
+    }
+  })
+  const [posts, setPosts] = React.useState([])
+
+
   const [expanded, setExpanded] = React.useState(false);
 
 
@@ -27,12 +61,17 @@ export default function Posts() {
   };
 
 
+
+
+
+
+
   return (
     <div style={{ width: "75%", margin: "20px", textAlign: "left", background: "darkred", padding: "20px" }}>
       <div>
-        {PostData.map((item, index) => {
+        {posts.map((item, index) => {
           return (
-            <Accordion expanded={expanded === index} onChange={handleChange(index)}>
+            <Accordion key={index} expanded={expanded === index} onChange={handleChange(index)}>
               <AccordionSummary>
                 <div style={{ margin: "10px 12px 6px", display: "inline" }}>
                   {(() => {
